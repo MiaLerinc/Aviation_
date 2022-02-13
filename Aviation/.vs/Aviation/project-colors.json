@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f599c87b-49ab-4d59-8766-9772941c7cb6": {
+      "ProjectGuid": "f599c87b-49ab-4d59-8766-9772941c7cb6",
+      "DisplayName": "AviationWebAPI",
+      "ColorIndex": 0
+    },
+    "ce221ee5-f5db-4cf9-92be-500c1800e2c0": {
+      "ProjectGuid": "ce221ee5-f5db-4cf9-92be-500c1800e2c0",
+      "DisplayName": "DomainModel",
+      "ColorIndex": 1
+    },
+    "20a3c8db-8b3e-45ed-8684-e4c151f557f5": {
+      "ProjectGuid": "20a3c8db-8b3e-45ed-8684-e4c151f557f5",
+      "DisplayName": "AviationBlazorServer",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

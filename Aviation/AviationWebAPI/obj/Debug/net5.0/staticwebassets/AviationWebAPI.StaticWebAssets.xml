@@ -1,0 +1,5 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="C:\Users\Korisnik\Desktop\Mia\Aviation\AviationWebAPI\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/AviationBlazorServer" Path="C:\Users\Korisnik\Desktop\Mia\Aviation\AviationBlazorServer\obj\Debug\net5.0\scopedcss\projectbundle\" />
+  <ContentRoot BasePath="_content/AviationBlazorServer" Path="C:\Users\Korisnik\Desktop\Mia\Aviation\AviationBlazorServer\wwwroot\" />
+</StaticWebAssets>

@@ -1,0 +1,41 @@
+﻿ @inject CountryService _countryService;
+
+ @if(Countries == null)
+{
+<p>Loading...</p>
+}
+else
+{
+<div class="airportFields">
+<label for="name">Airport Name</label>
+<InputText id="name" class="form-control" @bind-Value="@Airport.Name"></InputText>
+
+<label for="address">Airport Address</label>
+<InputText id="address" class="form-control" @bind-Value="@Airport.Address"></InputText>
+
+<label for="date">Airport Date</label>
+<InputDate id="date" class="form-control" @bind-Value="@Airport.Date"></InputDate>
+
+<label for="Countries">Country</label>
+<InputSelect id="Countries" @bind-Value="Airport.CountryId" class="form-control">
+<option value="">Select...</option>
+@foreach(var country in Countries)
+{
+<option value="@country.Id">@country.Name</option>
+}
+</InputSelect>
+</div>
+}
+
+
+
+@code {
+[Parameter]
+public Airport Airport{ get; set; }
+public List<Country> Countries{ get; set; }
+protected override async Task OnInitializedAsync()
+{
+Countries = await _countryService.GetCountries();
+}
+}
+

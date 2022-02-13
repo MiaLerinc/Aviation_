@@ -1,0 +1,76 @@
+﻿@page "/Airports"
+<h3>Airport List</h3>
+@inject AirportService _airportService;
+@inject NavigationManager _navigationManager;
+
+@if(Airports == null)
+{
+<div>Loading...</div>
+}
+else
+{
+<table  class="table table-responsive">
+<thead>
+<button type="button" class="btn btn-success" @onclick="OpenAddAirportPage">
+    <span class="oi oi-plus"></span>
+    Add Airport
+</button>
+<tr>
+<th>Name</th>
+<th>Address</th>
+<th>Date</th>
+<th>Country</th>
+</tr>
+</thead>
+<tbody>
+@foreach(var airport in Airports)
+{
+<tr>
+<td>@airport.Name</td>
+<td>@airport.Address</td>
+<td>@airport.Date.ToString("dd.MM.yyyy")</td>
+<td>@airport.Country?.Name</td>
+<td>
+<a href="/Airports/EditAirport/@airport.Id" class="btn btn-primary">
+<span class="oi oi-pencil"></span>
+</a>
+</td>
+<td>
+    <button type="button" class="btn btn-danger" @onclick="() => DeleteAirportAsync(airport.Id)">
+<span class="oi oi-delete"></span>
+</button>
+</td>
+<td>
+    <button type="button" class="btn btn-secondary" @onclick="() => ArchiveAirportAsync(airport.Id)">
+<span class="oi oi-transfer"></span>
+</button>
+</td>
+</tr>
+}
+</tbody>
+</table>
+}
+
+
+@code {
+    private List<Airport> Airports;
+    protected override async Task OnInitializedAsync()
+    {
+        Airports = await _airportService.GetAirports();
+    }
+    private void OpenAddAirportPage()
+    {
+        _navigationManager.NavigateTo("/Airports/AddAirport");
+    }
+    private async Task DeleteAirportAsync(int airportId)
+    {
+        await _airportService.DeleteAirportAsync(airportId);
+        Airports = await _airportService.GetAirports();
+    }
+    private async Task ArchiveAirportAsync(int airportId)
+    {
+        await _airportService.ArchiveAirportAsync(airportId);
+        Airports = await _airportService.GetAirports();
+    }
+
+}

@@ -1,0 +1,60 @@
+﻿@page "/Countries"
+<h3>Country List</h3>
+@inject CountryService _countryService;
+@inject NavigationManager _navigationManager;
+
+@if(Countries == null)
+{
+<div>Loading...</div>
+}
+else
+{
+<table  class="table table-responsive">
+<thead>
+    <button type="button" class="btn btn-success" @onclick="OpenAddCountryPage">
+    <span class="oi oi-plus"></span>
+    Add Country
+</button>
+<tr>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+@foreach(var country in Countries)
+{
+<tr>
+<td>@country.Name</td>
+<td>
+<a href="/Countries/EditCountry/@country.Id" class="btn btn-primary">
+<span class="oi oi-pencil"></span>
+</a>
+</td>
+<td>
+    <button type="button" class="btn btn-danger" @onclick="() => DeleteCountryAsync(country.Id)">
+<span class="oi oi-delete"></span>
+</button>
+</td>
+</tr>
+}
+</tbody>
+</table>
+}
+
+
+@code {
+    private List<Country> Countries;
+    protected override async Task OnInitializedAsync()
+    {
+        Countries = await _countryService.GetCountries();
+    }
+    private void OpenAddCountryPage()
+    {
+        _navigationManager.NavigateTo("/Countries/AddCountry");
+    }
+    private async Task DeleteCountryAsync(int countryId)
+    {
+        await _countryService.DeleteCountryAsync(countryId);
+        Countries = await _countryService.GetCountries();
+    }
+}
+

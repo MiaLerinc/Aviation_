@@ -1,0 +1,41 @@
+﻿@page "/archivedAirportList"
+@inject NavigationManager _navigationManager;
+@inject AirportService _airportService;
+<h3>Archived Airport List</h3>
+
+@if(Airports == null)
+{
+<p>Loading...</p>
+}
+else
+{
+<table  class="table table-responsive">
+<thead>
+<tr>
+<th>Name</th>
+<th>Address</th>
+<th>Date</th>
+<th>Country</th>
+</tr>
+</thead>
+<tbody>
+@foreach(var airport in Airports)
+{
+<tr>
+<td>@airport.Name</td>
+<td>@airport.Address</td>
+<td>@airport.Date.ToString("dd.MM.yyyy")</td>
+<td>@airport.Country?.Name</td>
+</tr>
+}
+</tbody>
+</table>
+}
+@code {
+public List<Airport> Airports { get; set; }
+protected override async Task OnInitializedAsync()
+{
+    Airports = await _airportService.GetArchivedAirportsAsync();
+}
+}
+

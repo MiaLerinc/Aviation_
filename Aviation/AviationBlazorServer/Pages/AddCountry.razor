@@ -1,0 +1,39 @@
+﻿@page "/Countries/AddCountry"
+@inject CountryService _countryService;
+@inject NavigationManager _navigationManager;
+
+<h3>Add Country</h3>
+
+<EditForm Model="@Country" OnValidSubmit="@AddCountryAsync">
+<label for="name">Country Name</label>
+<InputText id="name" class="form-control" @bind-Value="@Country.Name"></InputText>
+    <button type="submit" class="btn btn-success">
+    <span class="oi-pencil"></span>
+    Add Country
+</button>
+<button type="button"  class="btn btn-secondary" @onclick="Close">
+    <span class="oi oi-media-skip-backward"></span>
+    Close
+</button>
+</EditForm>
+
+@code {
+    public Country Country { get; set; }
+
+protected override async Task OnInitializedAsync()
+    {
+        Country = new Country();
+    }
+
+private async Task AddCountryAsync()
+    {
+        await _countryService.AddCountryAsync(Country);
+        Close();
+    }
+
+private void Close()
+    {
+        _navigationManager.NavigateTo("/Countries");
+    }
+
+}
